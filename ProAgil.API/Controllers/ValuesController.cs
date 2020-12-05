@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProAgil.API.Data;
 using ProAgil.API.Model;
@@ -20,9 +21,18 @@ namespace ProAgil.API.Controllers
 
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<Evento>> Get()
-        {
-            return _context.Eventos.ToList();
+        public IActionResult Get()
+        {   
+            try
+            { 
+                var results = _context.Eventos.ToList();
+                return Ok(results);    
+            }
+            catch (System.Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,"Bd Faillll");
+            }
+            
         }
 
         // GET api/values/5
