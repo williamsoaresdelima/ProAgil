@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProAgil.API.Data;
 using ProAgil.API.Model;
 
@@ -21,11 +22,11 @@ namespace ProAgil.API.Controllers
 
         // GET api/values
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {   
             try
             { 
-                var results = _context.Eventos.ToList();
+                var results = await _context.Eventos.ToListAsync();
                 return Ok(results);    
             }
             catch (System.Exception)
@@ -37,9 +38,17 @@ namespace ProAgil.API.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<Evento> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-           return _context.Eventos.FirstOrDefault(x => x.EventoId == id);
+           try
+            { 
+                var result = await _context.Eventos.FirstOrDefaultAsync(x => x.EventoId==id);
+                return Ok(result);    
+            }
+            catch (System.Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,"Bd Faillll");
+            }
         }
 
         // POST api/values
