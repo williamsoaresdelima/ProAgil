@@ -9,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 
 export class EventosComponent implements OnInit {
 
-  eventos: any;
+  eventos: any = [];
+  imagemALargura = 50;
+  imagemMargem = 2;
+  mostrarImagem = false;
+  filtroLista = '';
 
   constructor(private http: HttpClient) { }
 
@@ -25,4 +29,9 @@ export class EventosComponent implements OnInit {
       console.log(error);
     });
   }
+
+  alternarImagem(){
+    this.mostrarImagem = !this.mostrarImagem;
+  }
+
 }
