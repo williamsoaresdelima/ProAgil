@@ -1,12 +1,31 @@
-<p>
-  eventos works!
-</p>
+<form class="form-inline">
+  <div class="form-group mb-2">
+    <input type="text" class="form-control mr-2" placeholder="buscar">
+    <button class="btn btn-outline-success">buscar</button>
+  </div>
+</form>
 
-<div *ngFor="let evento of eventos"> 
-  Tema: {{evento.tema}}
-  <br>
-  Local:{{evento.local}}
-  <br>
-  <hr>
-</div>
-
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>#id</th>
+      <th>Tema</th>
+      <th>Local</th>
+      <th>Data</th>
+      <th>Qtd Pessoas</th>
+      <th>Lote</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+    <tbody>
+      <tr *ngFor="let evento of eventos">
+        <td>{{evento.eventoId}}</td>
+        <td>{{evento.tema}}</td>
+        <td>{{evento.local}}</td>
+        <td>{{evento.dataEvento}}</td>
+        <td>{{evento.qtdePessoas}}</td>
+        <td>{{evento.lote}}</td>
+        <td></td>
+      </tr>
+    </tbody>
+</table>
